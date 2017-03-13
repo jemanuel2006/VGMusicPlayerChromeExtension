@@ -1,0 +1,34 @@
+<div layout="column">
+    <div class="flex-container" fxLayout="row" style="padding-bottom: 20px; padding-top: 20px">
+        <button md-raised-button class="buttonGreen"
+        (click)="openCreatePlaylistDialog()">Create new playlist</button>
+    </div>
+    <div class="flex-container" fxLayout="row" 
+        fxLayout.xs="column"
+        fxLayoutAlign="left center"
+        fxLayoutAlign.xs="start">
+        <div class="flex-item" fxFlex="49%">
+            <input type='text'style='padding:8px;margin:15px auto;width:50%;' placeholder='Filter by Playlist name'
+            (keyup)='updatePlaylistFilter($event)'/>
+            <ngx-datatable
+            id="playlistsTable"
+            [rows]="currentPlaylistSelection"
+            [columns]="playlistComlumns" class="material" [columnMode]="'force'" [headerHeight]="50"
+            [footerHeight]="50" [rowHeight]="'auto'" [limit]="10" [selectionType]="'single'"
+            (select)='onPlaylistSelect($event)'>
+            </ngx-datatable>
+        </div>
+        <div class="flex-item" fxFlex="2%"></div>
+        <div class="flex-item" fxFlex="49%" *ngIf="selectedPlaylist != null">
+            <input type='text'style='padding:8px;margin:15px auto;width:50%;' placeholder='Filter by Song Name'
+            (keyup)='updateSongFilter($event)'/>
+            <ngx-datatable
+            id="playlistSongsTable"
+            [rows]="currentTrackSelection"
+            [columns]="songsColumns" class="material" [columnMode]="'force'" [headerHeight]="50"
+            [footerHeight]="50" [rowHeight]="'auto'" [limit]="10" [selectionType]="'single'"
+            (activate)="onSongSelect($event)" >
+            </ngx-datatable>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<md-toolbar>
+    <div class="flex-container" fxLayoutAlign="center center" fxLayout="row">
+        <div class="flex-item" fxFlex>
+            <media-player [songUrl]="selectedSong ? selectedSong.url : null" [songName]="selectedSong ? selectedSong.songName : null"></media-player>
+        </div>
+    </div>
+</md-toolbar>
+
+<md-tab-group>
+    <md-tab label="Find songs">
+        <div layout="column">
+            <div class="flex-container" fxLayout="row" 
+                fxLayout.xs="column"
+                fxLayoutAlign="left center"
+                fxLayoutAlign.xs="start">
+                <div class="flex-item" fxFlex="49%">
+                    <input type='text'style='padding:8px;margin:15px auto;width:50%;' placeholder='Filter by Album Name'
+                    (keyup)='updateAlbumFilter($event)'/>
+                    <ngx-datatable
+                    id="albumsTable"
+                    [rows]="currentAlbumSelection"
+                    [columns]="albumColumns" class="material" [columnMode]="'force'" [headerHeight]="50"
+                    [footerHeight]="50" [rowHeight]="'auto'" [limit]="10" [selectionType]="'single'"
+                    (select)='onAlbumSelect($event)'>
+                    </ngx-datatable>
+                </div>
+                <div class="flex-item" fxFlex="2%"></div>
+                <div class="flex-item" fxFlex="49%" *ngIf="selectedAlbum != null">
+                    <input type='text'style='padding:8px;margin:15px auto;width:50%;' placeholder='Filter by Song Name'
+                    (keyup)='updateSongFilter($event)'/>
+                    <ngx-datatable
+                    id="songsTable"
+                    [rows]="currentSelectedAlbumSelection" class="material" [columnMode]="'force'" [headerHeight]="50"
+                    [footerHeight]="50" [rowHeight]="'auto'" [limit]="10" [selectionType]="'single'" 
+                    (activate)="onSongSelect($event)">
+                        <ngx-datatable-column name="Song Name" prop="songName">
+                        </ngx-datatable-column>
+                        <ngx-datatable-column [width]="60" [canAutoResize]="false" [sortable]="false" [draggable]="false"
+                            [resizeable]="false">
+                            <template ngx-datatable-cell-template let-value="value" let-row="row">
+                                <button (click)="openCreatePlaylistDialog(row)" md-icon-button><i class="fa fa-plus fa-2x"></i></button>
+                            </template>
+                        </ngx-datatable-column>
+                    </ngx-datatable>
+                </div>
+            </div>
+        </div>
+    </md-tab>
+    <md-tab label="My Playlists">
+        <playlist-page (onSongSelected)="onSongSelect($event)">
+        </playlist-page>
+    </md-tab>
+</md-tab-group>

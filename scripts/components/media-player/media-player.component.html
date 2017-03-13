@@ -1,0 +1,7 @@
+<div fxFlex>
+    <button md-icon-button><i class="fa fa-backward fa-2x"></i></button>
+    <button md-icon-button><i class="fa fa-stop fa-2x"></i></button>
+    <button md-icon-button (click)="toggleAudio()"><i [ngClass]="isPlaying ? 'fa fa-pause fa-2x' : 'fa fa-play fa-2x'"></i></button>
+    <button md-icon-button><i class="fa fa-forward fa-2x"></i></button>
+</div>
+<span *ngIf="songName"> Playing: {{songName}} </span>
