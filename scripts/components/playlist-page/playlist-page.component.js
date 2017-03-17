@@ -53,6 +53,7 @@ System.register(['@angular/core', '@angular/material', '../../models/playlist-mo
                     this.currentPlaylistSelection = playlistService.getPlaylists();
                     this.playlists = playlistService.getPlaylists();
                     this.selectedPlaylist = null;
+                    this.currentTrackSelection = null;
                 }
                 PlaylistPageComponent.prototype.onPlaylistSelect = function (_a) {
                     var selected = _a.selected;
@@ -83,6 +84,7 @@ System.register(['@angular/core', '@angular/material', '../../models/playlist-mo
                     dialogRef.afterClosed().subscribe(function (result) {
                         var playlist = new playlist_model_1.Playlist();
                         playlist.name = result;
+                        playlist.tracks = [];
                         _this.playlistService.addPlaylist(playlist);
                     });
                 };

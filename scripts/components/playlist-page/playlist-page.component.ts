@@ -50,6 +50,7 @@ export class PlaylistPageComponent{
         this.currentPlaylistSelection = playlistService.getPlaylists();
         this.playlists = playlistService.getPlaylists();
         this.selectedPlaylist = null;
+        this.currentTrackSelection = null;
     }
 
     onPlaylistSelect({ selected }) {
@@ -87,7 +88,8 @@ export class PlaylistPageComponent{
         dialogRef.afterClosed().subscribe(result => {
             let playlist = new Playlist();
             playlist.name = result;
-            
+            playlist.tracks = [];
+
             this.playlistService.addPlaylist(playlist);
         });
     }

@@ -21,6 +21,7 @@ System.register(['@angular/core'], function(exports_1, context_1) {
         execute: function() {
             MediaPlayerComponent = (function () {
                 function MediaPlayerComponent() {
+                    this.currentSongEnded = new core_1.EventEmitter();
                     this.audioPlayer = new Audio();
                     this.isPlaying = false;
                     this.currentTimeElapsed = 0.0;
@@ -29,6 +30,7 @@ System.register(['@angular/core'], function(exports_1, context_1) {
                 MediaPlayerComponent.prototype.ngAfterViewInit = function () {
                     var _this = this;
                     this.audioPlayer.ontimeupdate = function () { return _this.currentTimeElapsed = _this.audioPlayer.currentTime; };
+                    this.audioPlayer.onended = function () { return _this.currentSongEnded.emit(null); };
                 };
                 MediaPlayerComponent.prototype.ngOnChanges = function (changes) {
                     console.log(changes);
@@ -71,6 +73,10 @@ System.register(['@angular/core'], function(exports_1, context_1) {
                     core_2.Input('songName'), 
                     __metadata('design:type', Object)
                 ], MediaPlayerComponent.prototype, "songName", void 0);
+                __decorate([
+                    core_1.Output(), 
+                    __metadata('design:type', core_1.EventEmitter)
+                ], MediaPlayerComponent.prototype, "currentSongEnded", void 0);
                 MediaPlayerComponent = __decorate([
                     core_1.Component({
                         selector: 'media-player',

@@ -25,6 +25,7 @@ System.config({
       '@angular/material': 'npm:@angular/material/bundles/material.umd.js',
       '@angular/flex-layout': 'npm:@angular/flex-layout/bundles/flex-layout.umd.js',
       'hammerjs': 'npm:hammerjs/hammer.js',
+      'angular-2-local-storage': 'npm:angular-2-local-storage/dist/index.js'
     },
   packages: {
     scripts: {

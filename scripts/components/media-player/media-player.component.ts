@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 import { Directive, ElementRef, Input, SimpleChanges } from '@angular/core';
 
 @Component({
@@ -11,6 +11,7 @@ import { Directive, ElementRef, Input, SimpleChanges } from '@angular/core';
 export class MediaPlayerComponent{
     @Input('songUrl') trackSrc: any;
     @Input('songName') songName: any;
+    @Output() currentSongEnded: EventEmitter<any> = new EventEmitter();
     currentTimeElapsed: any;
     audioPlayer: any;
     isPlaying: any;
@@ -24,6 +25,7 @@ export class MediaPlayerComponent{
 
     ngAfterViewInit(){
         this.audioPlayer.ontimeupdate = () => this.currentTimeElapsed = this.audioPlayer.currentTime;
+        this.audioPlayer.onended = () => this.currentSongEnded.emit(null);
     }
 
     ngOnChanges(changes: SimpleChanges) {

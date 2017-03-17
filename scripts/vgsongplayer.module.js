@@ -1,4 +1,4 @@
-System.register(['@angular/core', '@angular/platform-browser', '@angular/http', './vgsongplayer.component', './components/main-track-page/main-track-page.component', './components/media-player/media-player.component', './components/playlist-page/playlist-page.component', '@swimlane/ngx-datatable', '@angular/material', "@angular/flex-layout", './services/playlist-service', 'hammerjs'], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/platform-browser', '@angular/http', './vgsongplayer.component', './components/main-track-page/main-track-page.component', './components/media-player/media-player.component', './components/playlist-page/playlist-page.component', '@swimlane/ngx-datatable', '@angular/material', "@angular/flex-layout", './services/playlist-service', 'angular-2-local-storage', 'hammerjs'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', '@angular/platform-browser', '@angular/http', 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, platform_browser_1, http_1, vgsongplayer_component_1, main_track_page_component_1, media_player_component_1, playlist_page_component_1, ngx_datatable_1, material_1, flex_layout_1, playlist_service_1;
+    var core_1, platform_browser_1, http_1, vgsongplayer_component_1, main_track_page_component_1, media_player_component_1, playlist_page_component_1, ngx_datatable_1, material_1, flex_layout_1, playlist_service_1, angular_2_local_storage_1;
     var VGSongPlayerModule;
     return {
         setters:[
@@ -47,6 +47,9 @@ System.register(['@angular/core', '@angular/platform-browser', '@angular/http', 
             function (playlist_service_1_1) {
                 playlist_service_1 = playlist_service_1_1;
             },
+            function (angular_2_local_storage_1_1) {
+                angular_2_local_storage_1 = angular_2_local_storage_1_1;
+            },
             function (_1) {}],
         execute: function() {
             VGSongPlayerModule = (function () {
@@ -54,7 +57,11 @@ System.register(['@angular/core', '@angular/platform-browser', '@angular/http', 
                 }
                 VGSongPlayerModule = __decorate([
                     core_1.NgModule({
-                        imports: [platform_browser_1.BrowserModule, http_1.HttpModule, ngx_datatable_1.NgxDatatableModule, material_1.MaterialModule.forRoot(), flex_layout_1.FlexLayoutModule.forRoot()],
+                        imports: [platform_browser_1.BrowserModule, http_1.HttpModule, ngx_datatable_1.NgxDatatableModule, material_1.MaterialModule.forRoot(), flex_layout_1.FlexLayoutModule.forRoot(),
+                            angular_2_local_storage_1.LocalStorageModule.withConfig({
+                                prefix: 'vgsong-player',
+                                storageType: 'localStorage'
+                            })],
                         declarations: [vgsongplayer_component_1.VGSongPlayerComponent, main_track_page_component_1.MainTrackPageComponent, media_player_component_1.MediaPlayerComponent, playlist_page_component_1.PlaylistPageComponent, main_track_page_component_1.AddToPlaylistDialog, playlist_page_component_1.CreatePlaylistDialog],
                         entryComponents: [playlist_page_component_1.CreatePlaylistDialog, main_track_page_component_1.AddToPlaylistDialog],
                         bootstrap: [vgsongplayer_component_1.VGSongPlayerComponent],

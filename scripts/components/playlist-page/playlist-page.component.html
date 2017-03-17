@@ -24,10 +24,11 @@
             (keyup)='updateSongFilter($event)'/>
             <ngx-datatable
             id="playlistSongsTable"
-            [rows]="currentTrackSelection"
-            [columns]="songsColumns" class="material" [columnMode]="'force'" [headerHeight]="50"
+            [rows]="currentTrackSelection" class="material" [columnMode]="'force'" [headerHeight]="50"
             [footerHeight]="50" [rowHeight]="'auto'" [limit]="10" [selectionType]="'single'"
             (activate)="onSongSelect($event)" >
+                <ngx-datatable-column name="Song Name" prop="songName">
+                </ngx-datatable-column>
             </ngx-datatable>
         </div>
     </div>

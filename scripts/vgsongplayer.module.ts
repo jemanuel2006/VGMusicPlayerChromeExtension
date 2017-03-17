@@ -9,11 +9,16 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { PlaylistService } from './services/playlist-service';
+import { LocalStorageModule } from 'angular-2-local-storage';
 
 import 'hammerjs'
 
 @NgModule({
-  imports:      [ BrowserModule, HttpModule, NgxDatatableModule, MaterialModule.forRoot(), FlexLayoutModule.forRoot() ],
+  imports:      [ BrowserModule, HttpModule, NgxDatatableModule, MaterialModule.forRoot(), FlexLayoutModule.forRoot(),
+  LocalStorageModule.withConfig({
+    prefix: 'vgsong-player',
+    storageType: 'localStorage'
+  }) ],
   declarations: [ VGSongPlayerComponent, MainTrackPageComponent, MediaPlayerComponent, PlaylistPageComponent, AddToPlaylistDialog, CreatePlaylistDialog ],
   entryComponents: [CreatePlaylistDialog, AddToPlaylistDialog],
   bootstrap:    [ VGSongPlayerComponent ],

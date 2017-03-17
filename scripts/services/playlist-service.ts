@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable'
 import { Http, Response} from '@angular/http';
 import { Playlist } from '../models/playlist-model';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 import 'rxjs/add/operator/map'
 import 'rxjs/Rx';
@@ -11,17 +12,18 @@ import 'rxjs/Rx';
 export class PlaylistService{
     private playlists: Playlist[];
 
-    constructor(private http: Http){
-        this.playlists = null;
+    constructor(private localStorage: LocalStorageService){
+        this.playlists = <Playlist[]>this.localStorage.get("playlists");
+    }
+
+    saveCurrentSelectionToStorage(){
+        this.localStorage.set("playlists", this.playlists);
     }
 
     getPlaylists(){
         if(this.playlists == null){
             this.playlists = new Array<Playlist>();
-            let p = new Playlist();
-            p.name = "Teste";
-            p.tracks = [];
-            this.addPlaylist(p);
+            this.saveCurrentSelectionToStorage();
         }
 
         return this.playlists;
@@ -29,6 +31,7 @@ export class PlaylistService{
 
     addPlaylist(playlist){
         this.playlists.push(playlist);
+        this.saveCurrentSelectionToStorage();
     }
 
     addTrackToPlaylist(playlistName, track){
@@ -38,5 +41,7 @@ export class PlaylistService{
                 p.tracks.push(track);
             }
         }
+
+        this.saveCurrentSelectionToStorage();
     }
 }
